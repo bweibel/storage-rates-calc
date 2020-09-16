@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Storage Rates Calculator
  * Plugin URI:        http://smartz.com
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Calculates storage rate values based on google map locations. Built for Storage2u by Smartz
  * Version:           1.0.0
  * Author:            Ben Weibel
  * Author URI:        http://smartz.com
