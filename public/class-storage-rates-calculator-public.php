@@ -96,7 +96,7 @@ class Storage_Rates_Calculator_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/storage-rates-calculator-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/storage-rates-calculator-public.js', array( 'jquery', 'wp-element' ), $this->version, false );
 
 	}
 

@@ -30,7 +30,7 @@ class Storage_Rates_Calculator_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
-
+		
 	}
 
 }

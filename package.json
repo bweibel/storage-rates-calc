@@ -1,23 +1,5 @@
 {
-  "name": "storage-rates-calculator",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@gitlab.com/smartz/storage2u/storage-rates-calculator.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://gitlab.com/smartz/storage2u/storage-rates-calculator/issues"
-  },
-  "homepage": "https://gitlab.com/smartz/storage2u/storage-rates-calculator#readme",
-  "dependencies": {
+  "devDependencies": {
     "@wordpress/scripts": "^26.11.0"
   }
 }
