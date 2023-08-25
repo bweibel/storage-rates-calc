@@ -5,7 +5,7 @@ import StorageTypeCard from './StorageTypeCard'
 
 const TypeSelector = ({ currentType, onTypeSelect }) => {
   return (
-    <div className="TypeSelector">
+    <div className="TypeSelector inner">
       <h2>Step 1: What type of storage do you need?</h2>
       <div className="cards">
         {Object.entries(STORAGE_TYPES).map(([typeKey, typeData]) => (

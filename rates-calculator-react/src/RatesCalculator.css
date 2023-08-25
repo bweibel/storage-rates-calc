@@ -5,6 +5,16 @@ body {
     -moz-osx-font-smoothing: grayscale;
   }
 
+.inner {
+    max-width: 60rem;
+    margin-block: auto;
+}
+
+.RatesCalculator>* {
+    max-width: 80rem;
+    margin-inline: auto;
+}
+
 .cards {
     display: flex;
     flex-wrap: wrap;
@@ -20,7 +30,6 @@ body {
     justify-content: space-evenly;
     align-items: center;
     gap: 20px;
-    box-shadow: 2px 2px 7px rgba(0,0,0,0.1);
     padding: 2em 1.5em;
 }
 
@@ -46,4 +55,14 @@ body {
 .button:hover {
     background-color: #fff;
     color: #E0643A;
+}
+
+.has-shadow {
+    box-shadow: 2px 2px 7px rgba(0,0,0,0.1);
+}
+
+.storage-type-title {
+    font-size: 36px;
+    text-align: center;
+    margin-block: 3rem;
 }
