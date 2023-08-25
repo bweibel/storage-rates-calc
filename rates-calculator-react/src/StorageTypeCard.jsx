@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { STORAGE_TYPES } from './utils/constants';
 import './StorageTypeCard.css';

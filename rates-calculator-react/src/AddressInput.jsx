@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { GOOGLE_MAPS_API_KEY } from './utils/constants';
+import { GOOGLE_MAPS_API_KEY, RDM_YARD_LATLONG } from './utils/constants';
+import { metersToMiles } from './utils/functions';
 import './AddressInput.css';
 
 
-const AddressInput = ({ setDeliveryAddress, setDeliveryLatLng }) => {
+const AddressInput = ({ setDeliveryAddress, setDeliveryLatLng, setDeliveryDistance, setPickupDistance }) => {
     const [address, setAddress] = useState("");
     const [latLng, setLatLng] = useState(null);
+    const [distance, setDistance] = useState(null);
     const autocompleteInputRef = useRef(null);
 
     useEffect(() => {
@@ -25,6 +27,17 @@ const AddressInput = ({ setDeliveryAddress, setDeliveryLatLng }) => {
                 // set parent state
                 setDeliveryAddress(selectedAddress);
                 setDeliveryLatLng(selectedLatLng);
+                
+                // Calculate distance to RDM_YARD_LATLONG
+                const deliveryLatLng = new window.google.maps.LatLng(selectedLatLng.lat, selectedLatLng.lng);
+                const yardLatLng = new window.google.maps.LatLng(RDM_YARD_LATLONG.lat, RDM_YARD_LATLONG.lng);
+
+                const computedDistance = window.google.maps.geometry.spherical.computeDistanceBetween(deliveryLatLng, yardLatLng);
+                const distanceInMiles = metersToMiles(computedDistance);
+
+                setPickupDistance(distanceInMiles);
+                setDeliveryDistance(distanceInMiles);
+
             }
         });
 
@@ -32,7 +45,7 @@ const AddressInput = ({ setDeliveryAddress, setDeliveryLatLng }) => {
             // Remove listener on cleanup to avoid memory leaks
             window.google.maps.event.clearInstanceListeners(autocompleteInputRef.current);
         };
-    }, [setDeliveryAddress, setDeliveryLatLng]);
+    }, [setDeliveryAddress, setDeliveryLatLng, setDeliveryDistance, setPickupDistance]);
 
     return (
         <div className="address-input has-shadow content-box">
@@ -54,7 +67,9 @@ const AddressInput = ({ setDeliveryAddress, setDeliveryLatLng }) => {
                     loading="lazy" 
                     allowFullScreen 
                     src={`https://www.google.com/maps/embed/v1/place?key=${GOOGLE_MAPS_API_KEY}&q=${latLng.lat},${latLng.lng}`}>
-                </iframe>}
+                    </iframe>}
+                    {distance && <p>Distance to Yard: {distance.toFixed(2)} miles</p>}
+
             </div>
         </div>
     );

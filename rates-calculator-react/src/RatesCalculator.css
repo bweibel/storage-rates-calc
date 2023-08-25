@@ -73,6 +73,7 @@ a:hover {
     text-decoration: none;
 }
 
+.selected .button,
 .button:hover {
     background-color: #fff;
     color: #E0643A;

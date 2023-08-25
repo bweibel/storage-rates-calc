@@ -16,3 +16,7 @@
     grid-column: 1/4;
     font-size: 24px;
 }
+
+.estimate-box .cost {
+    font-weight: 600;
+}

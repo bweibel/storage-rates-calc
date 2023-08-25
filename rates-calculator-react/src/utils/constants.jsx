@@ -19,7 +19,27 @@ export const STORAGE_TYPES = {
     }
 };
   
-
+// Here, you can fetch or define your container data and display them accordingly
+export const CONTAINERS = [
+  {
+    id: 1,
+    size: "8'x8'x16'",
+    image: "./container-sizes-16-ft.webp",
+    monthlyCost: 165
+  },
+  {
+    id: 2,
+    size: "8'x8'x20'",
+    image: "./container-sizes-20-ft.webp",
+    monthlyCost: 165
+  },
+  {
+    id: 3,
+    size: "40'",
+    image: "./Storage-2U-40-Foot-Container-Blue.png",
+    monthlyCost: 185
+  }
+];
   
 export const GOOGLE_MAPS_API_KEY = 'AIzaSyBNh4-tMKKCd0LVTkNbNaRqtAOXqyJQLok';
 
@@ -28,7 +48,7 @@ export const RDM_YARD_LATLONG = { lat: 44.285720, lng: -121.157360 }
 
 export const PRICES = {
   timeModifier: 10,
-  fuelModifier: 20,
+  fuelModifier: 2.5,
   matainenceModifier: 30,
   fixedCost: 100
 }

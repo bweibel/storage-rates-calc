@@ -33,7 +33,7 @@
         border: none;
         background: none;
         cursor: pointer;
-        padding: .5em 1em;
+        padding: 0.5em 1em;
         font-size: 20px;
         font-weight: 600;
         transition: background-color .25s;
@@ -51,7 +51,7 @@
   .warning {
     position: fixed;
     bottom: 0;
-    background: white;
+    background: #fff;
     text-align: center;
 }
 

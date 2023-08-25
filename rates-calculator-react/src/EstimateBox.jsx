@@ -1,38 +1,40 @@
 import { useState, useEffect } from 'react';
 import './EstimateBox.css';
-import logo from './logo.svg';
+import { getTotalContainerCount, generateContainerInfo, calculateTotalPrice } from './utils/functions';
+import { PRICES, CONTAINERS } from './utils/constants';
 
-const EstimateBox = () => {
-  const [deliveryCost, setDeliveryCost] = useState(0);
-  const [pickupCost, setPickupCost] = useState(0);
-  const [monthlyCost, setMonthlyCost] = useState(0);
+const EstimateBox = ({deliveryDistance, pickupDistance, containerCount}) => {
+  const deliveryCost = calculateDistanceCost(deliveryDistance);
+  const pickupCost = calculateDistanceCost(pickupDistance);
+  const monthlyCost = calculateMonthlyCost(containerCount);
 
-  const calculateDeliveryCost = () => {
-    // Placeholder logic
-    return 50;  // static value for now
-  };
+  function calculateDistanceCost(distance) {
+    if (distance == null) {
+      return;
+    }
+    const deliveryCost = Math.round((distance * PRICES.timeModifier) + (distance * PRICES.fuelModifier) );
+    return deliveryCost * getTotalContainerCount(containerCount);
+  }
 
-  const calculatePickupCost = () => {
-    // Placeholder logic
-    return 40;  // static value for now
-  };
+  function calculateMonthlyCost(containerCount) {
+    if (containerCount == null || Object.keys(containerCount).length === 0 && containerCount.constructor === Object ) {
+      return null;
+    }
+    const generatedContainerInfo = generateContainerInfo(CONTAINERS, containerCount);
+    const totalPrice = calculateTotalPrice(generatedContainerInfo);
 
-  const calculateMonthlyCost = () => {
-    // Placeholder logic
-    return 150;  // static value for now
-  };
+    const monthlyCost = Math.round(totalPrice);
+    return monthlyCost;
+  }
 
-  useEffect(() => {
-    setDeliveryCost(calculateDeliveryCost());
-    setPickupCost(calculatePickupCost());
-    setMonthlyCost(calculateMonthlyCost());
-  }, []);
-
+  
   return (
     <div className="estimate-box has-shadow">
       <h3 className="title">Estimated Cost</h3>
       <h4>Estimated Delivery</h4><h4>Estimated Pickup</h4><h4>Estimated Monthly</h4>
-      <span className="cost">${ deliveryCost }</span><span className="cost">${ pickupCost }</span><span className="cost">${ monthlyCost }</span>
+      <span className="cost">$ {deliveryCost}</span>
+      <span className="cost">$ {pickupCost}</span>
+      <span className="cost">$ {monthlyCost}</span>
     </div>
   );
 };

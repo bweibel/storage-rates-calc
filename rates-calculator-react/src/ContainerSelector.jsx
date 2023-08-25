@@ -1,38 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
-
+import { getTotalContainerCount } from './utils/functions';
+import { CONTAINERS } from './utils/constants';
 import './ContainerSelector.css';
 
-const ContainerSelector = () => {
-  // Here, you can fetch or define your container data and display them accordingly
-  const containers = [
-    {
-      id: 1,
-      size: "8'x8'x16'",
-      image: "./container-sizes-16-ft.webp",
-      monthlyCost: 165
-    },
-    {
-      id: 2,
-      size: "8'x8'x20'",
-      image: "./container-sizes-20-ft.webp",
-      monthlyCost: 165
-    },
-    {
-      id: 3,
-      size: "40'",
-      image: "./Storage-2U-40-Foot-Container-Blue.png",
-      monthlyCost: null
-    }
-  ];
-
+const ContainerSelector = ({ containerCount, setContainerCount }) => {
   const LARGE_THRESHOLD = 5;
-  const [containerCount, setContainerCount] = useState({});
   const [showWarning, setShowWarning] = useState(false);
-
-  const getTotalContainerCount = (countState) => {
-    return Object.values(countState).reduce((acc, current) => acc + current, 0);
-  };
 
   const handleCloseWarning = () => {
     setShowWarning(false);
@@ -60,13 +34,12 @@ const ContainerSelector = () => {
   return (
     <div className="containers">
       <div className="cards">
-
       
-        {containers.map(container => (
+        {CONTAINERS.map(container => (
           <div key={container.id} className='container-card card has-shadow'>
             <h4 className='container-title'>{container.size}</h4>
             <img src={container.image} alt="" width="120px" />
-            <div class="quantity">
+            <div className="quantity">
               <button 
                 className='quantity-button quantity-down'
               onClick={() => handleContainerCountChange(container.id, -1)}
@@ -94,7 +67,7 @@ const ContainerSelector = () => {
             <button className="close-warning" onClick={handleCloseWarning}>x</button>
             <h3>That looks like a lot of containers!</h3>
             <p>You might want to give us a call and one of our representatives can help you with your order directly.</p>
-            <span class="tel"><a href="tel:+18006672670">1-800-667-2670</a></span>
+            <span className="tel"><a href="tel:+18006672670">1-800-667-2670</a></span>
       </div>
     }
       </div>

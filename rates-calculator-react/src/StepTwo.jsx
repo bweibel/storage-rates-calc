@@ -4,7 +4,7 @@ import { useState } from 'react';
 import AddressInput from './AddressInput';
 
 
-const StepTwo = ({ storageType, setDeliveryAddress, setDeliveryLatLng  }) => {
+const StepTwo = ({ storageType, setDeliveryAddress, setDeliveryLatLng, setDeliveryDistance, setPickupDistance }) => {
   let content;
 
   switch (storageType) {
@@ -15,6 +15,8 @@ const StepTwo = ({ storageType, setDeliveryAddress, setDeliveryLatLng  }) => {
         storageType={storageType}
         setDeliveryAddress={setDeliveryAddress} 
         setDeliveryLatLng={setDeliveryLatLng}
+        setDeliveryDistance={setDeliveryDistance}
+        setPickupDistance={setPickupDistance}
       />;
       break;
     default:
