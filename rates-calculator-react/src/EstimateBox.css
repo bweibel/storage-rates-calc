@@ -8,6 +8,8 @@
     margin: 30px auto;
     padding: 1em 1.5em;
     color: #fff;
+    position: sticky;
+    top: -100px;
 }
 
 .estimate-box .title {

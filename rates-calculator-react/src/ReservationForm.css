@@ -1,11 +1,18 @@
 .reservation-form {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 2rem;
     padding: 1rem;
     align-content: center;
     justify-content: center;
 }
+@media screen and (min-width: 60rem) {
+    .reservation-form {
+            grid-template-columns: 1fr 1fr;
+
+    }    
+}
+
 
 .form-group {
     width: 100%;
@@ -33,12 +40,16 @@ select {
 
 select,
 input[type="date"] {
-    width: fit-content;
     background: #fff;
 }
 
-button {
-    grid-column: 1/3;
+input[type="date"] {
+    width: fit-content;
+    max-width: 100%;
+}
+
+.reservation-form button {
+    grid-column: 1/-1;
     max-width: min-content;
     justify-self: center;
 }

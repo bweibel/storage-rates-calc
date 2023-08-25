@@ -5,33 +5,44 @@ body {
     -moz-osx-font-smoothing: grayscale;
   }
 
+a {
+    color: #E0643A;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #E0643A;
+    text-decoration: underline;
+
+}
+
 .inner {
     max-width: 60rem;
     margin-block: auto;
 }
 
 .RatesCalculator > * {
-    max-width: 80rem;
+    max-width: 60rem;
     margin-inline: auto;
 }
 
 .content-box {
     padding: 2rem 1.5rem;
     margin-bottom: 3rem;
-
+    border-radius: 3px;
 }
 
 
 .cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
     gap: 2em;
 }
 
 .cards .card {
-    flex-basis: 20em;
-    
+    flex-basis: 290px;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -40,6 +51,7 @@ body {
     padding: 2em 1.5em;
     outline: 0px solid #E0643A;
     transition: outline .2s ease-in-out;
+    max-width: 30rem;
 }
 
 
@@ -58,11 +70,13 @@ body {
     border-radius: 25px;
     cursor: pointer;
     transition: background-color .25s, color .25s;
+    text-decoration: none;
 }
 
 .button:hover {
     background-color: #fff;
     color: #E0643A;
+    text-decoration: none;
 }
 
 .has-shadow {
