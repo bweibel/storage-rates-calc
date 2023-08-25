@@ -9,7 +9,7 @@ const StorageTypeCard = ({ type, currentType, onTypeSelect }) => {
 
   return (
     <div className={`storage-type-card card has-shadow ${isActive ? 'selected' : ''}`} onClick={() => onTypeSelect(type)}>
-      <h3>{ typeData.cardTitle }</h3>
+      <h3 className='title'>{ typeData.cardTitle }</h3>
       <img src={ typeData.icon } alt="" />
       <p className="description">{ typeData.description }</p>
       <a className="button">Select</a>

@@ -1,2 +1,12 @@
-body {
+.storage-type-card {
+    transition: box-shadow .25s;
+} 
+
+.storage-type-card .title {
+    font-size: 20px;
+    margin: 0;
+}
+
+.storage-type-card :hover {
+    box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.1);
 }
