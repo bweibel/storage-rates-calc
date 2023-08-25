@@ -35,7 +35,7 @@ const AddressInput = ({ setDeliveryAddress, setDeliveryLatLng }) => {
     }, [setDeliveryAddress, setDeliveryLatLng]);
 
     return (
-        <div className="address-input has-shadow ">
+        <div className="address-input has-shadow content-box">
             <h3>Please provide your delivery address:</h3>
             <input
                 ref={autocompleteInputRef}
