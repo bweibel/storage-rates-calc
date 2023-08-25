@@ -17,9 +17,18 @@ export const STORAGE_TYPES = {
       description: "We deliver the box to your property you fill it, we pick it up and store it at our facility until you are ready for it again",
       icon: "./how-it-works-4.png"
     }
-  };
+};
+  
+
   
 export const GOOGLE_MAPS_API_KEY = 'AIzaSyBNh4-tMKKCd0LVTkNbNaRqtAOXqyJQLok';
 
 export const PDX_YARD_LATLONG = { lat: 45.384044684540335, lng: -122.78474009882885 }
 export const RDM_YARD_LATLONG = { lat: 44.285720, lng: -121.157360 }
+
+export const PRICES = {
+  timeModifier: 10,
+  fuelModifier: 20,
+  matainenceModifier: 30,
+  fixedCost: 100
+}
