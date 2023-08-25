@@ -1,13 +1,15 @@
 // StepThree.jsx
 import React from 'react';
 import ReservationForm from './ReservationForm';
-// ... other imports ...
+import ContainerSelector from './ContainerSelector';
 
 const StepThree = ({ onReservationSubmit, deliveryAddress, storageType }) => {
 
   return (
     <section className='step3'>
-          {/* Title and ContainerSelector components here ... */}
+        <h2>Step 3: What container size do you need?</h2>
+      <ContainerSelector />
+      
           <section className='reservation has-shadow content-box'>
             <h3>Make Your Reservation</h3>
             <ReservationForm onFormSubmit={onReservationSubmit} deliveryAddress={deliveryAddress} storageType={storageType} />

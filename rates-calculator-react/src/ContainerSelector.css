@@ -1,0 +1,83 @@
+.containers {
+    margin-bottom: 3rem
+}
+
+.container-details {
+    flex-basis: 100%;
+}
+
+.container-title {
+    font-size: 20px;
+    margin: 0;
+}
+
+.quantity {
+    display: flex;
+    max-width: 10em;
+    text-align: center;
+    border: 2px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  
+  .quantity input {
+    text-align: center;
+    border: none;
+  }
+  
+  .quantity input:focus {
+  }
+  
+  
+  .quantity-button {
+        border: none;
+        background: none;
+        cursor: pointer;
+        padding: .5em 1em;
+        font-size: 20px;
+        font-weight: 600;
+        transition: background-color .25s;
+    }
+
+    .quantity-button.quantity-up:hover {
+        background-color: #7FC29B;
+    }
+  
+  
+  .quantity-button.quantity-down:hover {
+    background-color: #E0643A
+  }
+
+  .warning {
+    position: fixed;
+    bottom: 0;
+    background: white;
+    text-align: center;
+}
+
+.warning h3 {
+    margin: 0;
+}
+
+.warning .close-warning {
+    top: 0;
+    right: 0;
+    position: absolute;
+    background: #fff;
+    border: 0;
+    font-size: 16px;
+    font-weight: 600;
+    padding: .5em 1em;
+    cursor: pointer;
+    color: #666;
+}
+
+.warning .close-warning:hover {
+    border-radius: 50%;
+    color: #000;
+}
+
+.warning .tel {
+    font-size: 18px;
+    font-weight: 600;
+}
