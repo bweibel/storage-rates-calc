@@ -11,6 +11,22 @@
     margin: 0;
 }
 
+.container-card {
+    position: relative;
+}
+
+.container-card .info-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    opacity: .7;
+    cursor: pointer;
+}
+
+.container-card .info-button:hover {
+    opacity: 1;
+}
+
 .quantity {
     display: flex;
     max-width: 10em;

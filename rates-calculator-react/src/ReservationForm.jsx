@@ -44,7 +44,7 @@ const ReservationForm = ({ onFormSubmit, deliveryAddress, storageType }) => {
       </div>
       <div className='form-group full'>
             <label>How did you find us?</label>
-            <select className="" id="how-found" aria-invalid="false" name="how-found"><option value="">Please choose an option</option><option value="Website/Search Engine">Website/Search Engine</option><option value="Saw a Container at someone's House/Business">Saw a Container at someone's House/Business</option><option value="Smart Shopper">Smart Shopper</option><option value="Facebook">Facebook</option><option value="Yelp">Yelp</option><option value="NextDoor">NextDoor</option><option value="Other">Other</option></select>
+            <select className="" id="how-found" aria-invalid="false" name="how-found"><option value="">Please choose an option</option><option value="Website/Search Engine">Website/Search Engine</option><option value="Saw a Container at someone's House/Business">Saw a Container at someone's House/Business</option><option value="Smart Shopper">Smart Shopper</option><option value="Facebook">Facebook</option><option value="Yelp">Yelp</option><option value="NextDoor">NextDoor</option><option value="Word of Mouth">Word of Mouth</option><option value="Other">Other</option></select>
           </div>
       
       <button type="submit" className='button'>Reserve</button>

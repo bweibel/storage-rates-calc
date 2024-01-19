@@ -4,13 +4,19 @@ import { metersToMiles } from './utils/functions';
 import './AddressInput.css';
 
 
-const AddressInput = ({ setDeliveryAddress, setDeliveryLatLng, setDeliveryDistance, setPickupDistance }) => {
+const AddressInput = ({ addressType, setDeliveryAddress, setDeliveryLatLng, setDeliveryDistance, setPickupDistance }) => {
     const [address, setAddress] = useState("");
     const [latLng, setLatLng] = useState(null);
     const [distance, setDistance] = useState(null);
     const autocompleteInputRef = useRef(null);
 
     useEffect(() => {
+        // Reset states when address type changes
+        setAddress("");
+        setLatLng(null);
+        setDistance(null);
+
+        if (!autocompleteInputRef.current) return;
         const autocomplete = new window.google.maps.places.Autocomplete(autocompleteInputRef.current);
 
         autocomplete.addListener("place_changed", () => {
@@ -43,13 +49,13 @@ const AddressInput = ({ setDeliveryAddress, setDeliveryLatLng, setDeliveryDistan
 
         return () => {
             // Remove listener on cleanup to avoid memory leaks
-            window.google.maps.event.clearInstanceListeners(autocompleteInputRef.current);
+            // window.google.maps.event.clearInstanceListeners(autocompleteInputRef.current);
         };
-    }, [setDeliveryAddress, setDeliveryLatLng, setDeliveryDistance, setPickupDistance]);
+    }, [addressType, setDeliveryAddress, setDeliveryLatLng, setDeliveryDistance, setPickupDistance]);
 
     return (
         <div className="address-input has-shadow content-box">
-            <h3>Please provide your delivery address:</h3>
+            <h3>Please provide your { addressType } delivery address:</h3>
             <input
                 ref={autocompleteInputRef}
                 type="text"

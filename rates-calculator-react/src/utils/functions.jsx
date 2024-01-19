@@ -6,6 +6,7 @@ export const getTotalContainerCount = (countState) => {
     return Object.values(countState).reduce((acc, current) => acc + current, 0);
 };
 
+
 export const generateContainerInfo = (containers, counts) => {
     return containers.map(container => ({
       id: container.id,

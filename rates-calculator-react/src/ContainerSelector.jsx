@@ -2,9 +2,11 @@ import React from 'react';
 import { useState } from 'react';
 import { getTotalContainerCount } from './utils/functions';
 import { CONTAINERS } from './utils/constants';
+import { Info } from 'lucide-react';
+
 import './ContainerSelector.css';
 
-const ContainerSelector = ({ containerCount, setContainerCount }) => {
+const ContainerSelector = ({ containerCount, setContainerCount, storageType }) => {
   const LARGE_THRESHOLD = 5;
   const [showWarning, setShowWarning] = useState(false);
 
@@ -30,15 +32,26 @@ const ContainerSelector = ({ containerCount, setContainerCount }) => {
       return nextState;
     });
   };
+
+  function getAvailibleContainers(storageType, containers) {
+  
+    // Filter containers based on whether their availableFor array includes the storageType
+    const filteredContainers = containers.filter(container => 
+      container.availableFor.includes(storageType)
+    );
+  
+    return filteredContainers;
+  }
   
   return (
     <div className="containers">
       <div className="cards">
       
-        {CONTAINERS.map(container => (
+        {getAvailibleContainers(storageType, CONTAINERS).map(container => (
           <div key={container.id} className='container-card card has-shadow'>
             <h4 className='container-title'>{container.size}</h4>
             <img src={container.image} alt="" width="120px" />
+            <Info className='info-button' size={24} />
             <div className="quantity">
               <button 
                 className='quantity-button quantity-down'
@@ -57,7 +70,8 @@ const ContainerSelector = ({ containerCount, setContainerCount }) => {
             >
               +
             </button>
-              </div>
+            </div>
+            {container.availibleFor}
           </div>
         ))}
 
