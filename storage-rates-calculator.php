@@ -80,3 +80,4 @@ function run_storage_rates_calculator() {
 
 }
 run_storage_rates_calculator();
+

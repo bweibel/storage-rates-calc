@@ -73,7 +73,7 @@ class Storage_Rates_Calculator_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/storage-rates-calculator-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/index-34804954.css', array(), $this->version, 'all' );
 
 	}
 
@@ -96,8 +96,10 @@ class Storage_Rates_Calculator_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/storage-rates-calculator-public.js', array( 'jquery', 'wp-element' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/index-b680aca0.js', array( 'jquery', 'wp-element' ), $this->version, true );
 
 	}
+
+	
 
 }

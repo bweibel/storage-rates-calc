@@ -13,7 +13,7 @@ const StorageTypeCard = ({ type, currentType, onTypeSelect }) => {
       <h3 className='title'>{ typeData.cardTitle }</h3>
       <img src={ typeData.icon } alt="" />
       <p className="description">{ typeData.description }</p>
-      <a className="button">Select</a>
+      <a className="calculator-button">Select</a>
     </div>
   );
 };

@@ -71,7 +71,6 @@ const ContainerSelector = ({ containerCount, setContainerCount, storageType }) =
               +
             </button>
             </div>
-            {container.availibleFor}
           </div>
         ))}
 
