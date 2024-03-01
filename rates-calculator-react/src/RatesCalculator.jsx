@@ -42,7 +42,6 @@ const RatesCalculator = () => {
         <h2 className="storage-type-title">{STORAGE_TYPES[storageType].storageTitle}</h2>
       ) : <h2 className="storage-type-title"></h2> }
 
-      <EstimateBox deliveryDistance={deliveryDistance} pickupDistance={pickupDistance} containerCount={containerCount} storageType={storageType} />
       {storageType && <StepTwo
         storageType={storageType}
         setInitialDeliveryAddress={setInitialDeliveryAddress}
@@ -51,6 +50,8 @@ const RatesCalculator = () => {
         setPickupLatLng={setPickupLatLng}
         setDeliveryDistance={setDeliveryDistance}
         setPickupDistance={setPickupDistance} />}
+            <EstimateBox deliveryDistance={deliveryDistance} pickupDistance={pickupDistance} containerCount={containerCount} storageType={storageType} />
+
       {initialDeliveryAddress && <StepThree
         containerCount={containerCount}
         setContainerCount={setContainerCount}

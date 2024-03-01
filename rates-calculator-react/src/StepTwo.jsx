@@ -49,7 +49,7 @@ const StepTwo = ({ storageType, setInitialDeliveryAddress, setFinalDeliveryAddre
   }
 
   return (
-    <section className='step2'>
+    <section className='step2 inner'>
       <h2>Step 2: Where are we delivering the storage unit?</h2>
       {content}
     </section>

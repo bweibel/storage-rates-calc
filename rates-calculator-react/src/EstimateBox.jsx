@@ -42,9 +42,7 @@ const EstimateBox = ({deliveryDistance, pickupDistance, containerCount, storageT
 
   
   return (
-    <div className="estimate-box has-shadow">
-      {deliveryDistance} {pickupDistance}
-      
+    <div className="estimate-box has-shadow">      
       <h3 className="title">Estimated Cost</h3>
       <div className="prices">
         <div className="price-box">
@@ -61,7 +59,7 @@ const EstimateBox = ({deliveryDistance, pickupDistance, containerCount, storageT
         </div>}
         <div className="price-box">
           <h4>Estimated Monthly</h4>
-          <span className="cost">$ {monthlyCost || '-'}</span>{storageType == 3 && <span className="cost"> Off-Site $ {offsiteCost || '-'}</span>}
+          <span className="cost">$ {monthlyCost || '-'}</span>{storageType == 3 && <span className="cost"> Off-Site Storage $ {offsiteCost || '-'}</span>}
           
 
         </div>

@@ -2,7 +2,7 @@ export const STORAGE_TYPES = {
     1: {
     cardTitle: "I Need Storage",
       storageTitle: "At Home Storage",
-      description: "We deliver the box to your property for your use and pick it up when you're done",
+      description: "We deliver the box to your property and pick it up when you're done",
       icon: "/wp-content/themes/wp-storage2u/images/storage-icon.svg"
     },
     2: {

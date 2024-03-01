@@ -74,9 +74,8 @@ const ContainerSelector = ({ containerCount, setContainerCount, storageType }) =
           </div>
         ))}
 
-      <a href="#" className='container-details'>Container Size Details</a>
       {showWarning && 
-          <div className="warning has-shadow inner content-box">
+          <div className="warning has-shadow content-box">
             <button className="close-warning" onClick={handleCloseWarning}>x</button>
             <h3>That looks like a lot of containers!</h3>
             <p>You might want to give us a call and one of our representatives can help you with your order directly.</p>
