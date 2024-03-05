@@ -27,3 +27,36 @@ export const calculateTotalOffsitePrice = (containerInfo) => {
     return total + (container.count * container.offsiteCost);
   }, 0);
 };
+
+export const scrollToNext = (step) => {
+  const timer = setTimeout(() => {
+    const stepTwoHeading = document.getElementById("step-two");
+    const estimateBox = document.getElementById("estimate-box");
+    const addressBoxFinal = document.getElementById("address-final");
+
+    switch ( step ) {
+      case "steptwo":
+        if (stepTwoHeading) {
+          stepTwoHeading.scrollIntoView({ block: "start", behavior: "smooth" });
+        }
+        break;
+      case "initialaddress":
+        if (addressBoxFinal) {
+          addressBoxFinal.scrollIntoView({ block: "start", behavior: "smooth" });
+        } else {
+          if (estimateBox) {
+            estimateBox.scrollIntoView({ block: "start", behavior: "smooth" });
+          }
+        }
+        break;
+      case "finaladdress":    
+        console.log("finaladdress");
+        if (estimateBox) {
+          estimateBox.scrollIntoView({ block: "start", behavior: "smooth" });
+        }
+        break;
+    }
+  }, 500);
+  
+  return () => clearTimeout(timer);
+}

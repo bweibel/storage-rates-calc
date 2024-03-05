@@ -25,24 +25,24 @@ export const CONTAINERS = [
     id: 1,
     size: "8'x8'x16'",
     image: "/wp-content/themes/wp-storage2u/images/container-sizes-16-ft.webp",
-    monthlyCost: 165,
-    offsiteCost: 75,
+    monthlyCost: 100,
+    offsiteCost: 1,
     availableFor: [1,2,3]
   },
   {
     id: 2,
     size: "8'x8'x20'",
     image: "/wp-content/themes/wp-storage2u/images/container-sizes-20-ft.webp",
-    monthlyCost: 165,
-    offsiteCost: 75,
+    monthlyCost: 200,
+    offsiteCost: 0,
     availableFor: [1,2,3]
   },
   {
     id: 3,
     size: "40'",
     image: "/wp-content/themes/wp-storage2u/images/Storage-2U-40-Foot-Container-Blue.png",
-    monthlyCost: 185,
-    offsiteCost: 75,
+    monthlyCost: 300,
+    offsiteCost: 0,
     availableFor: [1]
   }
 ];

@@ -33,6 +33,7 @@ const StepTwo = ({ storageType, setInitialDeliveryAddress, setFinalDeliveryAddre
         setDeliveryLatLng={setPickupLatLng}
         setDeliveryDistance={setPickupDistance}
         setPickupDistance={setPickupDistance}
+        
         /></>;
         break;
     case 3:

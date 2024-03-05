@@ -1,5 +1,3 @@
-
-
 a {
     color: #E0643A;
     text-decoration: none;
@@ -55,7 +53,8 @@ a:hover {
     outline: 3px solid #E0643A;
 }
 
-.calculator-button {
+.calculator-button,
+.reservation-form button {
     background-color: #E0643A;
     border: 4px solid #E0643A;
     color: #fff;
@@ -68,6 +67,7 @@ a:hover {
     text-decoration: none;
 }
 
+.reservation-form button:hover,
 .selected .calculator-button,
 .calculator-button:hover {
     background-color: #fff;

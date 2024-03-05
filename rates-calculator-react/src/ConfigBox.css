@@ -1,8 +1,8 @@
-.estimate-box {
-    background-color: #E0643A;
+.config-box {
+    background-color: black;
     color: #fff;
     position: sticky;
-    top: -60px;
+    top: 0px;
     padding: 1em 1.5em;
     margin: 30px auto;
     max-width: 60em;
@@ -11,29 +11,29 @@
     transition: transform .2s ease-in-out;
 }
 
-.estimate-box:hover {
+.config-box:hover {
     /* transform: translateY( 60px ); */
 }
 
-.estimate-box .prices {
+.config-box .prices {
     display: flex;
     justify-content: space-around;
    
     text-align: center;
 }
 
-.estimate-box .title {
+.config-box .title {
     grid-column: 1/4;
     font-size: 24px;
     margin: 0;
     text-align: center;
 }
 
-.estimate-box .price-box h4 {
+.config-box .price-box h4 {
     margin-bottom: 10px;
 }
 
-.estimate-box .cost {
+.config-box .cost {
     font-weight: 600;
     display: block;
 }
