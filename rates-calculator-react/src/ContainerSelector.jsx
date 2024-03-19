@@ -50,8 +50,8 @@ const ContainerSelector = ({ containerCount, setContainerCount, storageType }) =
         {getAvailibleContainers(storageType, CONTAINERS).map(container => (
           <div key={container.id} className='container-card card has-shadow'>
             <h4 className='container-title'>{container.size}</h4>
+            <p>{ container.description }</p>
             <img src={container.image} alt="" width="120px" />
-            <Info className='info-button' size={24} />
             <div className="quantity">
               <button 
                 className='quantity-button quantity-down'

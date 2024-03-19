@@ -25,15 +25,17 @@ export const CONTAINERS = [
     id: 1,
     size: "8'x8'x16'",
     image: "/wp-content/themes/wp-storage2u/images/container-sizes-16-ft.webp",
-    monthlyCost: 100,
-    offsiteCost: 1,
+    description: '3-4 rooms (1,024 sq ft)',
+    monthlyCost: 165,
+    offsiteCost: 0,
     availableFor: [1,2,3]
   },
   {
     id: 2,
     size: "8'x8'x20'",
     image: "/wp-content/themes/wp-storage2u/images/container-sizes-20-ft.webp",
-    monthlyCost: 200,
+    description: '4-5 rooms (1,280 sq ft)',
+    monthlyCost: 185,
     offsiteCost: 0,
     availableFor: [1,2,3]
   },
@@ -41,7 +43,8 @@ export const CONTAINERS = [
     id: 3,
     size: "40'",
     image: "/wp-content/themes/wp-storage2u/images/Storage-2U-40-Foot-Container-Blue.png",
-    monthlyCost: 300,
+    description: '',
+    monthlyCost: 149,
     offsiteCost: 0,
     availableFor: [1]
   }
@@ -50,11 +53,12 @@ export const CONTAINERS = [
 export const GOOGLE_MAPS_API_KEY = 'AIzaSyBNh4-tMKKCd0LVTkNbNaRqtAOXqyJQLok';
 
 export const PDX_YARD_LATLONG = { lat: 45.384044684540335, lng: -122.78474009882885 }
-export const RDM_YARD_LATLONG = { lat: 44.285720, lng: -121.157360 }
+export const YARD = { lat: 44.285720, lng: -121.157360 }
 
 export const PRICES = {
-  timeModifier: 10,
-  fuelModifier: 2.5,
-  maintenanceModifier: 30,
-  fixedCost: 100
+  timeModifier: 0,
+  fuelModifier: 0.6,
+  maintenanceModifier: 1.5,
+  fixedCost: 75,
+  minDeliveryCost: 0
 }

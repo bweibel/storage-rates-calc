@@ -50,7 +50,6 @@ export const scrollToNext = (step) => {
         }
         break;
       case "finaladdress":    
-        console.log("finaladdress");
         if (estimateBox) {
           estimateBox.scrollIntoView({ block: "start", behavior: "smooth" });
         }

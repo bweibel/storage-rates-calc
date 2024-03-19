@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { GOOGLE_MAPS_API_KEY, RDM_YARD_LATLONG } from './utils/constants';
+import { GOOGLE_MAPS_API_KEY, YARD } from './utils/constants';
 import { metersToMiles, scrollToNext } from './utils/functions';
 import './AddressInput.css';
 
@@ -34,9 +34,9 @@ const AddressInput = ({ addressType, setDeliveryAddress, setDeliveryLatLng, setD
                 setDeliveryAddress(selectedAddress);
                 setDeliveryLatLng(selectedLatLng);
                 
-                // Calculate distance to RDM_YARD_LATLONG
+                // Calculate distance to YARD
                 const deliveryLatLng = new window.google.maps.LatLng(selectedLatLng.lat, selectedLatLng.lng);
-                const yardLatLng = new window.google.maps.LatLng(RDM_YARD_LATLONG.lat, RDM_YARD_LATLONG.lng);
+                const yardLatLng = new window.google.maps.LatLng(YARD.lat, YARD.lng);
 
                 const computedDistance = window.google.maps.geometry.spherical.computeDistanceBetween(deliveryLatLng, yardLatLng);
                 calculateDrivingDistance(deliveryLatLng, yardLatLng, (e, distance) => {
@@ -61,19 +61,19 @@ const AddressInput = ({ addressType, setDeliveryAddress, setDeliveryLatLng, setD
         };
     }, [addressType, setDeliveryAddress, setDeliveryLatLng, setDeliveryDistance, setPickupDistance]);
 
-    function calculateDrivingDistance(deliveryLatLng, yardLatLng, callback) {
-        var directionsService = new google.maps.DirectionsService();
+    function calculateDrivingDistance(addressInitial, addressFinal, callback) {
+        let directionsService = new google.maps.DirectionsService();
     
-        var request = {
-            origin: deliveryLatLng,  // LatLng object
-            destination: yardLatLng, // LatLng object
+        let request = {
+            origin: addressInitial,  // LatLng object
+            destination: addressFinal, // LatLng object
             travelMode: google.maps.TravelMode.DRIVING,
         };
     
         directionsService.route(request, function(response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
                 // Get the distance from the response
-                var distance = response.routes[0].legs[0].distance.value; // Distance in meters
+                let distance = response.routes[0].legs[0].distance.value; // Distance in meters
                 callback(null, distance);
             } else {
                 // Handle the error

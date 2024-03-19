@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './RatesCalculator.css';
-import { STORAGE_TYPES, RDM_YARD_LATLONG, PRICES } from './utils/constants';
+import { STORAGE_TYPES, YARD, PRICES } from './utils/constants';
 
 import { scrollToNext } from './utils/functions';
 import TypeSelector from './TypeSelector';
@@ -16,6 +16,7 @@ const RatesCalculator = () => {
   const [deliveryDistance, setDeliveryDistance] = useState(null);
   const [deliveryLatLng, setDeliveryLatLng] = useState(null);
   const [pickupDistance, setPickupDistance] = useState(null);
+  const [relocationDistance, setRelocationDistance] = useState(null);
   const [pickupLatLng, setPickupLatLng] = useState(null);
 
   const [containerCount, setContainerCount] = useState({});
@@ -55,8 +56,18 @@ const RatesCalculator = () => {
         setPickupLatLng={setPickupLatLng}
         setDeliveryDistance={setDeliveryDistance}
         setPickupDistance={setPickupDistance} />}
-            <EstimateBox deliveryDistance={deliveryDistance} pickupDistance={pickupDistance} containerCount={containerCount} storageType={storageType} />
-            <ConfigBox deliveryDistance={deliveryDistance} pickupDistance={pickupDistance} containerCount={containerCount} storageType={storageType} />
+      <EstimateBox
+        deliveryDistance={deliveryDistance}
+        pickupDistance={pickupDistance}
+        relocationDistance={relocationDistance}
+        containerCount={containerCount}
+        storageType={storageType} />
+      <ConfigBox
+        deliveryDistance={deliveryDistance}
+        pickupDistance={pickupDistance}
+        relocationDistance={relocationDistance}
+        containerCount={containerCount}
+        storageType={storageType} />
 
       {initialDeliveryAddress && <StepThree
         containerCount={containerCount}

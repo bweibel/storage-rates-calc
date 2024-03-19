@@ -39,7 +39,7 @@ const ReservationForm = ({ onFormSubmit, deliveryAddress, storageType }) => {
             <input type="date" id="reservationDate" name="reservationDate" required />
           </div>
           <div className='form-group full'>
-            <label>Any special circumstances we should know for your estimate?</label>
+            <label>Any special circumstances we should know?</label>
             <textarea type="textarea" name="special-circumstances" rows="4" cols="50"/>
       </div>
       <div className='form-group full'>

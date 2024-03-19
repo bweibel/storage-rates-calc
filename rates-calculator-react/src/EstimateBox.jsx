@@ -3,10 +3,10 @@ import './EstimateBox.css';
 import { getTotalContainerCount, generateContainerInfo, calculateTotalPrice, calculateTotalOffsitePrice } from './utils/functions';
 import { PRICES, CONTAINERS } from './utils/constants';
 
-const EstimateBox = ({deliveryDistance, pickupDistance, containerCount, storageType}) => {
+const EstimateBox = ({deliveryDistance, pickupDistance, relocationDistance, containerCount, storageType}) => {
   const deliveryCost = calculateDistanceCost(deliveryDistance);
   const pickupCost = calculateDistanceCost(pickupDistance);
-  const relocationCost = calculateMonthlyCost(containerCount);
+  const relocationCost = calculateDistanceCost(relocationDistance);
   const monthlyCost = calculateMonthlyCost(containerCount);
   const offsiteCost = calculateOffsiteCost(containerCount);
 
@@ -15,7 +15,10 @@ const EstimateBox = ({deliveryDistance, pickupDistance, containerCount, storageT
     if (distance == null) {
       return;
     }
-    const deliveryCost = Math.round((distance * PRICES.timeModifier) + (distance * PRICES.fuelModifier) );
+    const deliveryCost = PRICES.fixedCost + Math.round((distance * PRICES.timeModifier) + (distance * PRICES.fuelModifier) + ( distance * PRICES.maintenanceModifier ));
+    if ( deliveryCost <= PRICES.minDeliveryCost ) {
+      deliveryCost = PRICES.minDeliveryCost;
+    }
     return deliveryCost * getTotalContainerCount(containerCount);
   }
 
@@ -47,19 +50,19 @@ const EstimateBox = ({deliveryDistance, pickupDistance, containerCount, storageT
       <h3 className="title">Estimated Cost</h3>
       <div className="prices">
         <div className="price-box">
-            <h4>Estimated Delivery</h4>
+            <h4>Delivery</h4>
             <span className="cost">$ {deliveryCost || '-'}</span>
         </div>
         <div className="price-box">
-            <h4>Estimated Pickup</h4>
+            <h4>Pickup</h4>
             <span className="cost">$ {pickupCost || '-'}</span>
         </div>
         {storageType == 2 && <div className="price-box">
-          <h4>Estimated Relocation</h4>
+          <h4>Relocation</h4>
           <span className="cost">$ {relocationCost || '-'}</span>
         </div>}
         <div className="price-box">
-          <h4>Estimated Monthly</h4>
+          <h4>Monthly</h4>
           <span className="cost">$ {monthlyCost || '-'}</span>{storageType == 3 && <span className="cost"> Off-Site Storage $ {offsiteCost || '-'}</span>}
           
 

@@ -3,7 +3,7 @@ import './ConfigBox.css';
 import { getTotalContainerCount, generateContainerInfo, calculateTotalPrice, calculateTotalOffsitePrice } from './utils/functions';
 import { PRICES, CONTAINERS } from './utils/constants';
 
-const ConfigBox = ({deliveryDistance, pickupDistance, containerCount, storageType}) => {
+const ConfigBox = ({deliveryDistance, pickupDistance, relocationDistance, containerCount, storageType}) => {
   const deliveryCost = calculateDistanceCost(deliveryDistance);
   const pickupCost = calculateDistanceCost(pickupDistance);
   const relocationCost = calculateMonthlyCost(containerCount);
@@ -43,8 +43,21 @@ const ConfigBox = ({deliveryDistance, pickupDistance, containerCount, storageTyp
 
   
   return (
-    <div className="config-box has-shadow" id="estimate-box">      
-      Delivery Distance: {deliveryDistance} Miles
+    <div className="config-box has-shadow" id="estimate-box">     
+      <table>
+        <tbody>
+          <tr><td> Delivery Distance (Dropoff from yard):  </td><td>{deliveryDistance} </td></tr>
+          {storageType == 2 && <tr><td> Relocation Distance (Location 1 > Location 2):  </td><td>{relocationDistance}</td></tr>}
+          <tr><td> Delivery Distance (Pickup and return to yard):  </td><td>{pickupDistance}</td></tr>
+          <tr><td>Time Estimate: {deliveryDistance * PRICES.timeModifier}</td></tr>
+          <tr><td>Fuel Cost: {deliveryDistance * PRICES.fuelModifier}</td></tr>
+          <tr><td>Maintenance Cost: {deliveryDistance * PRICES.maintenanceModifier}</td></tr>
+          <tr><td>Fixed Cost: {PRICES.fixedCost }</td></tr>
+          <tr><td>Min Delivery Cost: {PRICES.minDeliveryCost}</td></tr>
+        </tbody>
+      </table>  
+    
+
     </div>
   );
 };
