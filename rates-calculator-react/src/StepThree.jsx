@@ -3,12 +3,13 @@ import React from 'react';
 import ReservationForm from './ReservationForm';
 import ContainerSelector from './ContainerSelector';
 
-const StepThree = ({ setContainerCount, containerCount, onReservationSubmit, deliveryAddress, storageType }) => {
+const StepThree = ({ containers, setContainerCount, containerCount, onReservationSubmit, deliveryAddress, storageType }) => {
 
   return (
     <section className='step3'>
         <h2>Step 3: What container size do you need?</h2>
-        <ContainerSelector
+      <ContainerSelector
+          containers={containers}
           containerCount={containerCount}
           setContainerCount={setContainerCount}
           storageType={storageType} />

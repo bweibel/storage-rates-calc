@@ -154,7 +154,7 @@ class Storage_Rates_Calculator_Admin {
 				"show_in_rest" => true,
 				"rest_base" => "calculator",
 				"rest_controller_class" => "WP_REST_Posts_Controller",
-				"rest_namespace" => "s2u",
+				// "rest_namespace" => "s2u",
 				"has_archive" => false,
 				"show_in_menu" => true,
 				"show_in_nav_menus" => false,

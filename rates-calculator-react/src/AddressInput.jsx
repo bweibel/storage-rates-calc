@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { GOOGLE_MAPS_API_KEY, YARD } from './utils/constants';
+import { GOOGLE_MAPS_API_KEY, YARD, YARD_STORAGE } from './utils/constants';
 import { metersToMiles, scrollToNext } from './utils/functions';
 import './AddressInput.css';
 
 
-const AddressInput = ({ addressType, setDeliveryAddress, setDeliveryLatLng, setDeliveryDistance, setPickupDistance }) => {
+const AddressInput = ({storageType, deliveryLatLng, addressType, yard, yardStorage, setParentAddress, setParentLatLng, setDeliveryDistance, setPickupDistance, setRelocationDistance  }) => {
     const [address, setAddress] = useState("");
     const [latLng, setLatLng] = useState(null);
     const [distance, setDistance] = useState(null);
@@ -25,33 +25,14 @@ const AddressInput = ({ addressType, setDeliveryAddress, setDeliveryLatLng, setD
             if (selectedPlace.geometry) {
                 const selectedAddress = selectedPlace.formatted_address;
                 const selectedLatLng = selectedPlace.geometry.location.toJSON();
-                
+
                 // set local state
                 setAddress(selectedAddress);
                 setLatLng(selectedLatLng);
-                
+
                 // set parent state
-                setDeliveryAddress(selectedAddress);
-                setDeliveryLatLng(selectedLatLng);
-                
-                // Calculate distance to YARD
-                const deliveryLatLng = new window.google.maps.LatLng(selectedLatLng.lat, selectedLatLng.lng);
-                const yardLatLng = new window.google.maps.LatLng(YARD.lat, YARD.lng);
-
-                const computedDistance = window.google.maps.geometry.spherical.computeDistanceBetween(deliveryLatLng, yardLatLng);
-                calculateDrivingDistance(deliveryLatLng, yardLatLng, (e, distance) => {
-                    console.log('distance:' + metersToMiles(distance));
-                    const distanceInMiles = metersToMiles(distance);
-                    setPickupDistance(distanceInMiles);
-                    setDeliveryDistance(distanceInMiles);
-
-                    if ( addressType == 'initial' ) {
-                        scrollToNext("initialaddress");
-                    } else {
-                        scrollToNext("finaladdress");
-                    }
-                })
-                
+                setParentAddress(selectedAddress);
+                setParentLatLng(selectedLatLng);
             }
         });
 
@@ -59,7 +40,7 @@ const AddressInput = ({ addressType, setDeliveryAddress, setDeliveryLatLng, setD
             // Remove listener on cleanup to avoid memory leaks
             // window.google.maps.event.clearInstanceListeners(autocompleteInputRef.current);
         };
-    }, [addressType, setDeliveryAddress, setDeliveryLatLng, setDeliveryDistance, setPickupDistance]);
+    }, [addressType, setParentAddress, setParentLatLng, setDeliveryDistance, setPickupDistance]);
 
     function calculateDrivingDistance(addressInitial, addressFinal, callback) {
         let directionsService = new google.maps.DirectionsService();
@@ -84,7 +65,7 @@ const AddressInput = ({ addressType, setDeliveryAddress, setDeliveryLatLng, setD
 
     return (
         <div className="address-input has-shadow content-box" id={"address-" + addressType }>
-            <h3>Please provide your { addressType } delivery address:</h3>
+            <h3>Please provide your {addressType} delivery address:</h3>
             <input
                 ref={autocompleteInputRef}
                 type="text"

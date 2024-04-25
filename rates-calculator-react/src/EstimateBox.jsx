@@ -1,24 +1,25 @@
 import { useState, useEffect } from 'react';
 import './EstimateBox.css';
 import { getTotalContainerCount, generateContainerInfo, calculateTotalPrice, calculateTotalOffsitePrice } from './utils/functions';
-import { PRICES, CONTAINERS } from './utils/constants';
+import { CONTAINERS } from './utils/constants';
 
-const EstimateBox = ({deliveryDistance, pickupDistance, relocationDistance, containerCount, storageType}) => {
+const EstimateBox = ({prices, deliveryDistance, pickupDistance, relocationDistance, containerCount, storageType}) => {
   const deliveryCost = calculateDistanceCost(deliveryDistance);
   const pickupCost = calculateDistanceCost(pickupDistance);
   const relocationCost = calculateDistanceCost(relocationDistance);
   const monthlyCost = calculateMonthlyCost(containerCount);
   const offsiteCost = calculateOffsiteCost(containerCount);
 
-
   function calculateDistanceCost(distance) {
     if (distance == null) {
       return;
     }
-    const deliveryCost = PRICES.fixedCost + Math.round((distance * PRICES.timeModifier) + (distance * PRICES.fuelModifier) + ( distance * PRICES.maintenanceModifier ));
-    if ( deliveryCost <= PRICES.minDeliveryCost ) {
-      deliveryCost = PRICES.minDeliveryCost;
+    let deliveryCost = parseInt(prices.fixedCost) + Math.round( (distance * prices.fuelModifier) + ( distance * prices.maintenanceModifier ));
+
+    if (deliveryCost <= prices.minDeliveryCost) {
+      deliveryCost = prices.minDeliveryCost;
     }
+
     return deliveryCost * getTotalContainerCount(containerCount);
   }
 
@@ -28,7 +29,6 @@ const EstimateBox = ({deliveryDistance, pickupDistance, relocationDistance, cont
     }
     const generatedContainerInfo = generateContainerInfo(CONTAINERS, containerCount);
     const totalPrice = calculateTotalPrice(generatedContainerInfo);
-
     const monthlyCost = Math.round(totalPrice);
     return monthlyCost;
   }

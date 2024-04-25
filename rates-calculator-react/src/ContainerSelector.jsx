@@ -1,12 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
 import { getTotalContainerCount } from './utils/functions';
-import { CONTAINERS } from './utils/constants';
 import { Info } from 'lucide-react';
 
 import './ContainerSelector.css';
 
-const ContainerSelector = ({ containerCount, setContainerCount, storageType }) => {
+const ContainerSelector = ({containers, containerCount, setContainerCount, storageType }) => {
   const LARGE_THRESHOLD = 5;
   const [showWarning, setShowWarning] = useState(false);
 
@@ -47,11 +46,12 @@ const ContainerSelector = ({ containerCount, setContainerCount, storageType }) =
     <div className="containers">
       <div className="cards">
       
-        {getAvailibleContainers(storageType, CONTAINERS).map(container => (
+        {containers.map(container => (
+          
           <div key={container.id} className='container-card card has-shadow'>
             <h4 className='container-title'>{container.size}</h4>
             <p>{ container.description }</p>
-            <img src={container.image} alt="" width="120px" />
+            <img src={'http://localhost:10033/' + container.image} alt="" width="120px" />
             <div className="quantity">
               <button 
                 className='quantity-button quantity-down'

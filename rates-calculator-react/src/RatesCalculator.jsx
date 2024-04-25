@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './RatesCalculator.css';
-import { STORAGE_TYPES, YARD, PRICES } from './utils/constants';
+import { CONTAINERS, STORAGE_TYPES, VARS} from './utils/constants';
 
 import { scrollToNext } from './utils/functions';
 import TypeSelector from './TypeSelector';
@@ -9,13 +9,31 @@ import ConfigBox from "./ConfigBox";
 
 import StepTwo from './StepTwo';
 import StepThree from './StepThree';
+import { Calculator } from 'lucide-react';
+
+const dataUrl = 'http://localhost:10033/wp-json/wp/v2/calculator/740';
+
+console.log(VARS);
 
 const RatesCalculator = () => {
+  
+const [prices, setPrices] = useState( {
+          timeModifier: 1,
+          fuelModifier: VARS.fuelCost,
+          maintenanceModifier: VARS.maintenanceCost,
+          fixedCost: VARS.flatFee,
+          minDeliveryCost: VARS.minimumDeliveryCost,
+        });
 
+  const [containers, setContainers] = useState(VARS.containers);
   const [storageType, setStorageType] = useState(null);
+  const [yard, setYard] = useState(VARS.yardLocation);
+  const [yardStorage, setYardStorage] = useState(VARS.yardLocationStorage);
   const [deliveryDistance, setDeliveryDistance] = useState(null);
   const [deliveryLatLng, setDeliveryLatLng] = useState(null);
   const [pickupDistance, setPickupDistance] = useState(null);
+  const [storageDistance, setStorageDistance] = useState(null);
+
   const [relocationDistance, setRelocationDistance] = useState(null);
   const [pickupLatLng, setPickupLatLng] = useState(null);
 
@@ -23,7 +41,6 @@ const RatesCalculator = () => {
 
   const [initialDeliveryAddress, setInitialDeliveryAddress] = useState("");
   const [finalDeliveryAddress, setFinalDeliveryAddress] = useState("");
-
 
   useEffect(() => {
     // Reset states when storageType changes
@@ -35,6 +52,7 @@ const RatesCalculator = () => {
     setDeliveryDistance(null);
     setDeliveryLatLng(null);
     setPickupDistance(null);
+    setStorageDistance(null);
     setPickupLatLng(null);
     
     scrollToNext("steptwo");
@@ -50,19 +68,29 @@ const RatesCalculator = () => {
 
       {storageType && <StepTwo
         storageType={storageType}
+        yard={yard}
+        yardStorage={yardStorage}
+        deliveryLatLng={deliveryLatLng}
         setInitialDeliveryAddress={setInitialDeliveryAddress}
         setFinalDeliveryAddress={setFinalDeliveryAddress}
         setDeliveryLatLng={setDeliveryLatLng}
         setPickupLatLng={setPickupLatLng}
         setDeliveryDistance={setDeliveryDistance}
-        setPickupDistance={setPickupDistance} />}
+        setPickupDistance={setPickupDistance}
+        setRelocationDistance={setRelocationDistance}
+        setStorageDistance={setStorageDistance} />}
       <EstimateBox
+        prices={prices}
+        containers={containers}
         deliveryDistance={deliveryDistance}
         pickupDistance={pickupDistance}
         relocationDistance={relocationDistance}
         containerCount={containerCount}
         storageType={storageType} />
+       
       <ConfigBox
+        prices={prices}
+        containers={containers}
         deliveryDistance={deliveryDistance}
         pickupDistance={pickupDistance}
         relocationDistance={relocationDistance}
@@ -70,6 +98,7 @@ const RatesCalculator = () => {
         storageType={storageType} />
 
       {initialDeliveryAddress && <StepThree
+        containers={containers}
         containerCount={containerCount}
         setContainerCount={setContainerCount}
         storageType={storageType}
