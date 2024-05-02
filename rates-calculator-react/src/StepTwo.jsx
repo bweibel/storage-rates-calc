@@ -1,51 +1,74 @@
 // StepTwo.js
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AddressInput from './AddressInput';
 import { metersToMiles, scrollToNext } from './utils/functions';
 
 
-const StepTwo = ({ storageType, deliveryLatLng, finalLatLng, setInitialDeliveryAddress, setFinalDeliveryAddress, setDeliveryLatLng, setDeliveryDistance, setPickupDistance, setPickupLatLng, yard, yardStorage }) => {
-  let content;
+const StepTwo = ({ storageType, initialDeliveryAddress, finalDeliveryAddress, setParentInitialDeliveryAddress, setParentFinalDeliveryAddress, setParentDeliveryDistance, setParentPickupDistance, setParentRelocationDistance, yard, yardStorage }) => {
 
-  const [initialDistance, setinitialDistance] = useState(calculateDropoffDistance(deliveryLatLng, yard));
-  const [relocationDistance, setRelocationDistance] = useState(calculateDropoffDistance(deliveryLatLng, finalLatLng));
+  const [initialAddress, setInitialAddress] = useState(initialDeliveryAddress);
+  const [finalAddress, setFinalAddress] = useState(finalDeliveryAddress);
 
-  // const [distance, setDistance] = useState( calculateDropoffDistance(deliveryLatLng, yard) );
+  const [initialDistance, setInitialDistance] = useState(0);
+  const [relocationDistance, setRelocationDistance] = useState( 0 );
+  const [finalDistance, setFinalDistance] = useState(0);
 
+  const [finalDestinationKnown, setfinalDestinationKnown] = useState(false);
 
-//     // Calculate distance to yard from each address
-//     const formattedLatLng = new window.google.maps.LatLng(selectedLatLng.lat, selectedLatLng.lng);
-//     const yardLatLng = new window.google.maps.LatLng(yard.lat, yard.lng);
-//     const yardStorageLatLng = new window.google.maps.LatLng(yardStorage.lat, yardStorage.lng);
-//     const computedDistance = window.google.maps.geometry.spherical.computeDistanceBetween(formattedLatLng, yardLatLng);
+   // useEffect to update localDeliveryDistance whenever deliveryDistance prop changes
+  useEffect(() => {
+    console.log(initialAddress)
+    if (initialAddress && finalAddress) { 
+      setRelocationDistance( calculateRelocationDistance(initialAddress, finalAddress) );
+    }
+  }, [initialAddress, finalAddress]);  // Dependency array includes deliveryDistance
 
-  // calculateDrivingDistance(formattedLatLng, yardLatLng, (e, distance) => {
-  //   const distanceInMiles = metersToMiles(distance);
-  //   setPickupDistance(distanceInMiles);
-  //   setDeliveryDistance(distanceInMiles);
+  useEffect(() => {
+    console.log(initialAddress)
+    if (initialAddress && finalAddress) { 
+      setParentRelocationDistance( relocationDistance  );
+    }
+  }, [relocationDistance]);  // Dependency array includes deliveryDistance
 
-  //   if (addressType == 'initial') {
-  //       scrollToNext("initialaddress");
-  //   } else if(addressType == 'final'){
-  //       console.log("calculating second address");
-  //       console.log(deliveryLatLng);
-  //       const formattedDeliveryLatLng = new window.google.maps.LatLng(deliveryLatLng.lat, deliveryLatLng.lng);
+  // 
+  // setInitialDeliveryAddress(address)
+  // 
+  function setInitialDeliveryAddress(address) {
+    console.log("Setting Inital Address");
+    console.log(address);
 
-  //       console.log(formattedLatLng);
-  //       calculateDrivingDistance(formattedDeliveryLatLng, formattedLatLng, (e, distance) => {
-  //           const distanceInMiles = metersToMiles(distance);
-  //           console.log("second address distance:" + distanceInMiles)
-  //           setRelocationDistance(distanceInMiles)
-  //           scrollToNext("finaladdress" );
-  //       }
-  //       )
-  //   }
-  // })
+    calculateDropoffDistance(address, yard)
+    setInitialAddress(address);
+    setParentInitialDeliveryAddress(address);
 
+    // If this is basic storage, the Final Address is the same as initial
+    if (storageType == 1) {
+      setFinalDeliveryAddress(address);
+    }
+  }
+
+  // 
+  // setFinalDeliveryAddress(address)
+  // 
+  function setFinalDeliveryAddress(address) {
+    console.log("Setting Final Address");
+    console.log(address);
+    calculatePickupDistance(address, yard);
+
+    setFinalAddress(address);
+    setParentFinalDeliveryAddress(address);
+    // If this is a relocation, calculate distance
+    if (storageType == 2) {
+    }
+  }
+
+  // 
   // Calculate the distance between two points
   // Returns in miles
+  // 
   function calculateDrivingDistance(addressInitial, addressFinal, callback) {
+    console.log("Calculating distance for " + addressInitial + " and " + addressFinal);
     let directionsService = new google.maps.DirectionsService();
 
     let request = {
@@ -67,78 +90,82 @@ const StepTwo = ({ storageType, deliveryLatLng, finalLatLng, setInitialDeliveryA
     });
 }
   
+  // 
   // Calculate initial Dropoff Distance
+  // 
   function calculateDropoffDistance(deliveryLatLng, yard) {
     console.log("calculating Drop off");
     calculateDrivingDistance(deliveryLatLng, yard, (e, distance) => {
-      return (distance);
+      setInitialDistance(distance);
+      setParentDeliveryDistance(distance);
+      // setParentInitialDistance( distance );
     })
   }
  
-
+  // 
   // Calculate relocation Distance
-  function calculateRelocationDistance() {
+  // 
+  function calculateRelocationDistance(initalAddress, finalAddress) {
     console.log("calculating Relocation");
-    calculateDrivingDistance(deliveryLatLng, yard, (e, distance) => {
-      return (distance);
+    if (initialAddress == null || finalAddress == null) {
+      return null;
+    }
+    calculateDrivingDistance(initalAddress, finalAddress, (e, distance ) => {
+      setRelocationDistance(distance);
     })
   }
 
+  // 
   // Calculate final pickup Distance
-  function calculatePickupDistance() {
+  // 
+  function calculatePickupDistance(pickupLatLng, yard) {
     console.log("calculating Pickup");
-    calculateDrivingDistance(deliveryLatLng, yard, (e, distance) => {
-      return (distance);
+    calculateDrivingDistance(pickupLatLng, yard, (e, distance) => {
+      console.log(distance);
+      setFinalDistance(distance);
+      setParentPickupDistance(distance);
     })
   }
 
+  const handleKnownDestinationClick = () => {
+    setfinalDestinationKnown( ! finalDestinationKnown );
+  };
+
+  let content;
 
   switch (storageType) {
     case 1:
       content = <AddressInput
         setParentAddress={setInitialDeliveryAddress} 
-        setParentLatLng={setDeliveryLatLng}
       />;
       break;
     case 2:
       content = <><AddressInput
         storageType={storageType}
-        yard={yard}
-        yardStorage={yardStorage}
         addressType='initial'
         setParentAddress={setInitialDeliveryAddress} 
-        setParentLatLng={setDeliveryLatLng}
-        setDeliveryDistance={setDeliveryDistance}
-        setPickupDistance={setPickupDistance}
-        setRelocationDistance={setRelocationDistance}
+
       />
         <AddressInput
         storageType={storageType}
-        yard={yard}
-        yardStorage={yardStorage}
-        deliveryLatLng={deliveryLatLng}
         addressType='final'
         setParentAddress={setFinalDeliveryAddress} 
-        setParentLatLng={setPickupLatLng}
-        setDeliveryDistance={setPickupDistance}
-        setPickupDistance={setPickupDistance}
-        setRelocationDistance={setRelocationDistance}
         /></>;
         break;
     case 3:
       content = <>
       <AddressInput
         storageType={storageType}
-        yard={yard}
-        yardStorage={yardStorage}
-        setDeliveryAddress={setInitialDeliveryAddress} 
-        setDeliveryLatLng={setDeliveryLatLng}
-        setDeliveryDistance={setDeliveryDistance}
-        setPickupDistance={setPickupDistance}
+        addressType='initial'
+        setParentAddress={setInitialDeliveryAddress} 
         />
-        <a className="calculator-button" >I know my final destination</a>
+      { <label class="container"><input type="checkbox" onClick={handleKnownDestinationClick} /><span class="checkmark"></span>I know my final destination</label>}
+      {finalDestinationKnown && <AddressInput
+        storageType={storageType}
+        addressType='final'
+        setParentAddress={setFinalDeliveryAddress} 
+      />}
       </>;
-      
       break;
     default:
       content = null;

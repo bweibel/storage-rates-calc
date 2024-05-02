@@ -8,11 +8,13 @@ export const getTotalContainerCount = (countState) => {
 
 
 export const generateContainerInfo = (containers, counts) => {
+  console.log("Generating Containers");
+  console.log(containers)
     return containers.map(container => ({
       id: container.id,
       count: counts[container.id] || 0,
-      cost: container.monthlyCost,
-      offsiteCost: container.offsiteCost
+      cost: container.monthly_fee,
+      offsiteCost: container.offsite_fee
     }));
   };
   

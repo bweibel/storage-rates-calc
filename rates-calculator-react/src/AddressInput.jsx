@@ -4,7 +4,7 @@ import { metersToMiles, scrollToNext } from './utils/functions';
 import './AddressInput.css';
 
 
-const AddressInput = ({storageType, deliveryLatLng, addressType, yard, yardStorage, setParentAddress, setParentLatLng, setDeliveryDistance, setPickupDistance, setRelocationDistance  }) => {
+const AddressInput = ({addressType, setParentAddress, setParentLatLng, setDeliveryDistance, setPickupDistance, setRelocationDistance  }) => {
     const [address, setAddress] = useState("");
     const [latLng, setLatLng] = useState(null);
     const [distance, setDistance] = useState(null);
@@ -32,7 +32,7 @@ const AddressInput = ({storageType, deliveryLatLng, addressType, yard, yardStora
 
                 // set parent state
                 setParentAddress(selectedAddress);
-                setParentLatLng(selectedLatLng);
+                // setParentLatLng(selectedLatLng);
             }
         });
 
@@ -40,28 +40,7 @@ const AddressInput = ({storageType, deliveryLatLng, addressType, yard, yardStora
             // Remove listener on cleanup to avoid memory leaks
             // window.google.maps.event.clearInstanceListeners(autocompleteInputRef.current);
         };
-    }, [addressType, setParentAddress, setParentLatLng, setDeliveryDistance, setPickupDistance]);
-
-    function calculateDrivingDistance(addressInitial, addressFinal, callback) {
-        let directionsService = new google.maps.DirectionsService();
-    
-        let request = {
-            origin: addressInitial,  // LatLng object
-            destination: addressFinal, // LatLng object
-            travelMode: google.maps.TravelMode.DRIVING,
-        };
-    
-        directionsService.route(request, function(response, status) {
-            if (status == google.maps.DirectionsStatus.OK) {
-                // Get the distance from the response
-                let distance = response.routes[0].legs[0].distance.value; // Distance in meters
-                callback(null, distance);
-            } else {
-                // Handle the error
-                callback(new Error('Cannot retrieve driving distance: ' + status));
-            }
-        });
-    }
+    }, [addressType]);
 
     return (
         <div className="address-input has-shadow content-box" id={"address-" + addressType }>

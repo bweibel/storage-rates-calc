@@ -44,12 +44,12 @@ const ConfigBox = ({prices, containers, deliveryDistance, pickupDistance, reloca
   
   return (
     <div className="config-box has-shadow" id="estimate-box">     
+      <h3>Config</h3>
       <table>
         <tbody>
           <tr><td> Delivery Distance (Dropoff from yard):  </td><td>{deliveryDistance} </td></tr>
           {storageType == 2 && <tr><td> Relocation Distance (Location 1 to Location 2):  </td><td>{relocationDistance}</td></tr>}
           <tr><td> Delivery Distance (Pickup and return to yard):  </td><td>{pickupDistance}</td></tr>
-          <tr><td>Time Estimate: {prices.timeModifier}</td></tr>
           <tr><td>Fuel Cost: {deliveryDistance * prices.fuelModifier}</td></tr>
           <tr><td>Maintenance Cost: {deliveryDistance * prices.maintenanceModifier}</td></tr>
           <tr><td>Fixed Cost: {prices.fixedCost }</td></tr>

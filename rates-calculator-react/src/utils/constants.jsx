@@ -21,33 +21,36 @@ export const STORAGE_TYPES = {
   
 // Here, you can fetch or define your container data and display them accordingly
 export const CONTAINERS = [
-  {
-    id: 1,
-    size: "8'x8'x16'",
-    image: "/wp-content/themes/wp-storage2u/images/container-sizes-16-ft.webp",
-    description: '3-4 rooms (1,024 sq ft)',
-    monthlyCost: 165,
-    offsiteCost: 0,
-    availableFor: [1,2,3]
-  },
-  {
-    id: 2,
-    size: "8'x8'x20'",
-    image: "/wp-content/themes/wp-storage2u/images/container-sizes-20-ft.webp",
-    description: '4-5 rooms (1,280 sq ft)',
-    monthlyCost: 185,
-    offsiteCost: 0,
-    availableFor: [1,2,3]
-  },
-  {
-    id: 3,
-    size: "40'",
-    image: "/wp-content/themes/wp-storage2u/images/Storage-2U-40-Foot-Container-Blue.png",
-    description: '',
-    monthlyCost: 149,
-    offsiteCost: 0,
-    availableFor: [1]
-  }
+    {
+        "size": "8'x8'x16'",
+        "image": "http://localhost:10033/wp-content/uploads/2018/05/container-sizes-16-ft.png",
+        "monthly_fee": "165",
+        "offsite_fee": "",
+        "dropoff_fee": "",
+        "pickup_fee": "",
+        "description": "3-4 rooms (1,024 sq ft)",
+        "id": 1
+    },
+    {
+        "size": "8'x8'x20'",
+        "image": "http://localhost:10033/wp-content/uploads/2018/05/container-sizes-20-ft.png",
+        "monthly_fee": "185",
+        "offsite_fee": "",
+        "dropoff_fee": "",
+        "pickup_fee": "",
+        "description": "4-5 rooms (1,280 sq ft)",
+        "id": 2
+    },
+    {
+        "size": "40'",
+        "image": "http://localhost:10033/wp-content/uploads/2019/11/Storage-2U-40-Foot-Container-Blue.png",
+        "monthly_fee": "149",
+        "offsite_fee": "",
+        "dropoff_fee": "",
+        "pickup_fee": "",
+        "description": "",
+        "id": 3
+    }
 ];
   
 export const GOOGLE_MAPS_API_KEY = 'AIzaSyBNh4-tMKKCd0LVTkNbNaRqtAOXqyJQLok';

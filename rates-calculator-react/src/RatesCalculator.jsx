@@ -30,12 +30,10 @@ const [prices, setPrices] = useState( {
   const [yard, setYard] = useState(VARS.yardLocation);
   const [yardStorage, setYardStorage] = useState(VARS.yardLocationStorage);
   const [deliveryDistance, setDeliveryDistance] = useState(null);
-  const [deliveryLatLng, setDeliveryLatLng] = useState(null);
   const [pickupDistance, setPickupDistance] = useState(null);
   const [storageDistance, setStorageDistance] = useState(null);
 
   const [relocationDistance, setRelocationDistance] = useState(null);
-  const [pickupLatLng, setPickupLatLng] = useState(null);
 
   const [containerCount, setContainerCount] = useState({});
 
@@ -50,10 +48,9 @@ const [prices, setPrices] = useState( {
     setContainerCount({});
   
     setDeliveryDistance(null);
-    setDeliveryLatLng(null);
+    setRelocationDistance(null);
     setPickupDistance(null);
     setStorageDistance(null);
-    setPickupLatLng(null);
     
     scrollToNext("steptwo");
   }, [storageType]);
@@ -70,14 +67,13 @@ const [prices, setPrices] = useState( {
         storageType={storageType}
         yard={yard}
         yardStorage={yardStorage}
-        deliveryLatLng={deliveryLatLng}
-        setInitialDeliveryAddress={setInitialDeliveryAddress}
-        setFinalDeliveryAddress={setFinalDeliveryAddress}
-        setDeliveryLatLng={setDeliveryLatLng}
-        setPickupLatLng={setPickupLatLng}
-        setDeliveryDistance={setDeliveryDistance}
-        setPickupDistance={setPickupDistance}
-        setRelocationDistance={setRelocationDistance}
+        initialDeliveryAddress={initialDeliveryAddress}
+        finalDeliveryAddress={finalDeliveryAddress}
+        setParentInitialDeliveryAddress={setInitialDeliveryAddress}
+        setParentFinalDeliveryAddress={setFinalDeliveryAddress}
+        setParentDeliveryDistance={setDeliveryDistance}
+        setParentPickupDistance={setPickupDistance}
+        setParentRelocationDistance={setRelocationDistance}
         setStorageDistance={setStorageDistance} />}
       <EstimateBox
         prices={prices}

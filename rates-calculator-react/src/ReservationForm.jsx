@@ -1,24 +1,28 @@
 // ReservationForm.jsx
+import { useState, useEffect } from 'react';
+
 import React from 'react';
 import './ReservationForm.css';
 
 const ReservationForm = ({ onFormSubmit, deliveryAddress, storageType }) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+const handleFormSubmit = async (e) => {
+  e.preventDefault();
+  setIsSubmitting(true);
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
+  const reservationDate = e.target.reservationDate.value;
+  const formData = { reservationDate, deliveryAddress, storageType };
 
-    // Retrieve form data, for example:
-    const reservationDate = e.target.reservationDate.value;
+  try {
+    await onFormSubmit(formData);  // Assuming onFormSubmit returns a promise
+    // handle success, maybe clear the form or show a success message
+  } catch (error) {
+    // handle error, maybe show an error message
+  }
 
-    // Now, you can combine it with the deliveryAddress and storageType
-    const formData = {
-      reservationDate,
-      deliveryAddress,
-      storageType
-    };
-
-    onFormSubmit(formData);
-  };
+  setIsSubmitting(false);
+};
 
   return (
       <form onSubmit={handleFormSubmit} className="reservation-form">
@@ -28,7 +32,13 @@ const ReservationForm = ({ onFormSubmit, deliveryAddress, storageType }) => {
           </div>
             <div className='form-group'>
             <label>Phone Number:</label>
-            <input type="text" name="name" placeholder='Phone Number' required />
+            <input
+            type="tel"
+            name="phoneNumber"
+            placeholder='xxx-xxx-xxxx'
+            required
+            pattern="[0-9]{3}-?[0-9]{3}-?[0-9]{4}"
+          />
           </div>
           <div className='form-group'>
             <label>Email:</label>

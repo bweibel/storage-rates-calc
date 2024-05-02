@@ -28,6 +28,7 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="date"],
+input[type="tel"],
 textarea,
 select {
     font-family: 'Helvetica Neue', sans-serif;

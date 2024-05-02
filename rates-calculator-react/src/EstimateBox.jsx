@@ -3,16 +3,20 @@ import './EstimateBox.css';
 import { getTotalContainerCount, generateContainerInfo, calculateTotalPrice, calculateTotalOffsitePrice } from './utils/functions';
 import { CONTAINERS } from './utils/constants';
 
-const EstimateBox = ({prices, deliveryDistance, pickupDistance, relocationDistance, containerCount, storageType}) => {
+const EstimateBox = ({ prices, deliveryDistance, pickupDistance, relocationDistance, containerCount, storageType }) => {
   const deliveryCost = calculateDistanceCost(deliveryDistance);
   const pickupCost = calculateDistanceCost(pickupDistance);
   const relocationCost = calculateDistanceCost(relocationDistance);
   const monthlyCost = calculateMonthlyCost(containerCount);
   const offsiteCost = calculateOffsiteCost(containerCount);
 
+  // 
+  // 
+  // 
   function calculateDistanceCost(distance) {
+    // console.log("calculating Distance Cost for " + distance);
     if (distance == null) {
-      return;
+      return null;
     }
     let deliveryCost = parseInt(prices.fixedCost) + Math.round( (distance * prices.fuelModifier) + ( distance * prices.maintenanceModifier ));
 
@@ -20,19 +24,26 @@ const EstimateBox = ({prices, deliveryDistance, pickupDistance, relocationDistan
       deliveryCost = prices.minDeliveryCost;
     }
 
-    return deliveryCost * getTotalContainerCount(containerCount);
+    return ( deliveryCost * getTotalContainerCount(containerCount) );
   }
 
+  // 
+  // 
+  // 
   function calculateMonthlyCost(containerCount) {
     if (containerCount == null || Object.keys(containerCount).length === 0 && containerCount.constructor === Object ) {
       return null;
     }
     const generatedContainerInfo = generateContainerInfo(CONTAINERS, containerCount);
+    console.log(generatedContainerInfo);
     const totalPrice = calculateTotalPrice(generatedContainerInfo);
     const monthlyCost = Math.round(totalPrice);
     return monthlyCost;
   }
 
+  // 
+  // 
+  // 
   function calculateOffsiteCost(containerCount) {
     if (containerCount == null || Object.keys(containerCount).length === 0 && containerCount.constructor === Object ) {
       return null;
@@ -44,14 +55,13 @@ const EstimateBox = ({prices, deliveryDistance, pickupDistance, relocationDistan
     return monthlyCost;
   }
 
-  
   return (
     <div className="estimate-box has-shadow" id="estimate-box">      
       <h3 className="title">Estimated Cost</h3>
       <div className="prices">
         <div className="price-box">
             <h4>Delivery</h4>
-            <span className="cost">$ {deliveryCost || '-'}</span>
+            <span className="cost">$ {calculateDistanceCost(deliveryDistance) || '-'}</span>
         </div>
         <div className="price-box">
             <h4>Pickup</h4>
@@ -63,9 +73,7 @@ const EstimateBox = ({prices, deliveryDistance, pickupDistance, relocationDistan
         </div>}
         <div className="price-box">
           <h4>Monthly</h4>
-          <span className="cost">$ {monthlyCost || '-'}</span>{storageType == 3 && <span className="cost"> Off-Site Storage $ {offsiteCost || '-'}</span>}
-          
-
+          <span className="cost">$ {monthlyCost || '-'}</span>{storageType == 3 && <span className="cost"> Off-Site $ {offsiteCost || '-'}</span>}
         </div>
       
        
