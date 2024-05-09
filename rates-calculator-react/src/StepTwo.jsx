@@ -5,7 +5,7 @@ import AddressInput from './AddressInput';
 import { metersToMiles, scrollToNext } from './utils/functions';
 
 
-const StepTwo = ({ storageType, initialDeliveryAddress, finalDeliveryAddress, setParentInitialDeliveryAddress, setParentFinalDeliveryAddress, setParentDeliveryDistance, setParentPickupDistance, setParentRelocationDistance, yard, yardStorage }) => {
+const StepTwo = ({ storageType, initialDeliveryAddress, finalDeliveryAddress, setParentInitialDeliveryAddress, setParentFinalDeliveryAddress, setParentDeliveryDistance, setParentPickupDistance, setParentRelocationDistance, setParentInitialStorageDistance, setParentFinalStorageDistance, yard, yardStorage }) => {
 
   const [initialAddress, setInitialAddress] = useState(initialDeliveryAddress);
   const [finalAddress, setFinalAddress] = useState(finalDeliveryAddress);
@@ -13,30 +13,28 @@ const StepTwo = ({ storageType, initialDeliveryAddress, finalDeliveryAddress, se
   const [initialDistance, setInitialDistance] = useState(0);
   const [relocationDistance, setRelocationDistance] = useState( 0 );
   const [finalDistance, setFinalDistance] = useState(0);
+  const [initialStorageDistance, setInitialStorageDistance] = useState(0);
+  const [finalStorageDistance, setFinalStorageDistance] = useState(0);
+
 
   const [finalDestinationKnown, setfinalDestinationKnown] = useState(false);
 
    // useEffect to update localDeliveryDistance whenever deliveryDistance prop changes
   useEffect(() => {
-    console.log(initialAddress)
+    console.log("An address Changed. Checking relocation distance")
     if (initialAddress && finalAddress) { 
-      setRelocationDistance( calculateRelocationDistance(initialAddress, finalAddress) );
-    }
+      if (storageType == 2) {
+        setRelocationDistance(calculateRelocationDistance(initialAddress, finalAddress));
+        setParentRelocationDistance( relocationDistance  );
+      } 
+    } 
   }, [initialAddress, finalAddress]);  // Dependency array includes deliveryDistance
 
-  useEffect(() => {
-    console.log(initialAddress)
-    if (initialAddress && finalAddress) { 
-      setParentRelocationDistance( relocationDistance  );
-    }
-  }, [relocationDistance]);  // Dependency array includes deliveryDistance
 
   // 
   // setInitialDeliveryAddress(address)
   // 
   function setInitialDeliveryAddress(address) {
-    console.log("Setting Inital Address");
-    console.log(address);
 
     calculateDropoffDistance(address, yard)
     setInitialAddress(address);
@@ -45,6 +43,12 @@ const StepTwo = ({ storageType, initialDeliveryAddress, finalDeliveryAddress, se
     // If this is basic storage, the Final Address is the same as initial
     if (storageType == 1) {
       setFinalDeliveryAddress(address);
+    }
+
+    console.log(storageType);
+    if (storageType == 3) {
+      // TODO: if final address known
+      calculateInitialYardDistance(address, yardStorage);
     }
   }
 
@@ -58,8 +62,9 @@ const StepTwo = ({ storageType, initialDeliveryAddress, finalDeliveryAddress, se
 
     setFinalAddress(address);
     setParentFinalDeliveryAddress(address);
-    // If this is a relocation, calculate distance
-    if (storageType == 2) {
+
+    if (storageType == 3) {
+      calculateFinalYardDistance(address, yardStorage);
     }
   }
 
@@ -108,22 +113,49 @@ const StepTwo = ({ storageType, initialDeliveryAddress, finalDeliveryAddress, se
   function calculateRelocationDistance(initalAddress, finalAddress) {
     console.log("calculating Relocation");
     if (initialAddress == null || finalAddress == null) {
+      console.log("One of the addresses doesn't exist yet");
       return null;
     }
     calculateDrivingDistance(initalAddress, finalAddress, (e, distance ) => {
       setRelocationDistance(distance);
+      setParentRelocationDistance(distance);
     })
   }
 
   // 
   // Calculate final pickup Distance
   // 
-  function calculatePickupDistance(pickupLatLng, yard) {
+  function calculatePickupDistance(pickupAddress, yard) {
     console.log("calculating Pickup");
-    calculateDrivingDistance(pickupLatLng, yard, (e, distance) => {
+    calculateDrivingDistance(pickupAddress, yard, (e, distance) => {
       console.log(distance);
       setFinalDistance(distance);
       setParentPickupDistance(distance);
+    })
+  }
+
+  // 
+  // Calculate storage yard Distance
+  // 
+  function calculateInitialYardDistance(address, yardStorage) {
+    console.log("Calculating Storage Yard distance to ");
+    console.log(yardStorage);
+    calculateDrivingDistance(address, yardStorage, (e, distance) => {
+      console.log(distance);
+      setInitialStorageDistance(distance);
+      setParentInitialStorageDistance(distance);
+    })
+  }
+
+     // 
+  // Calculate final storage yard Distance
+  // 
+  function calculateFinalYardDistance(address, yardStorage) {
+    console.log("Calculating Storage Yard distance");
+    calculateDrivingDistance(address, yardStorage, (e, distance) => {
+      console.log(distance);
+      setFinalStorageDistance(distance);
+      setParentFinalStorageDistance(distance);
     })
   }
 
@@ -159,7 +191,7 @@ const StepTwo = ({ storageType, initialDeliveryAddress, finalDeliveryAddress, se
         addressType='initial'
         setParentAddress={setInitialDeliveryAddress} 
         />
-      { <label class="container"><input type="checkbox" onClick={handleKnownDestinationClick} /><span class="checkmark"></span>I know my final destination</label>}
+      { <label className="checkbox-container"><input type="checkbox" onClick={handleKnownDestinationClick} /><span className="checkmark"></span>I know my final destination</label>}
       {finalDestinationKnown && <AddressInput
         storageType={storageType}
         addressType='final'

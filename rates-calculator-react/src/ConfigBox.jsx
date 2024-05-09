@@ -4,11 +4,11 @@ import { getTotalContainerCount, generateContainerInfo, calculateTotalPrice, cal
 // import { containers } from './utils/constants';
 
 const ConfigBox = ({prices, containers, deliveryDistance, pickupDistance, relocationDistance, containerCount, storageType}) => {
-  const deliveryCost = calculateDistanceCost(deliveryDistance);
-  const pickupCost = calculateDistanceCost(pickupDistance);
-  const relocationCost = calculateMonthlyCost(containerCount);
-  const monthlyCost = calculateMonthlyCost(containerCount);
-  const offsiteCost = calculateOffsiteCost(containerCount);
+  const deliveryCost = calculateDistanceCost( Math.round(deliveryDistance * 100)/100);
+  const pickupCost = calculateDistanceCost( Math.round(pickupDistance * 100)/100);
+  const relocationCost = calculateMonthlyCost( Math.round(containerCount * 100)/100);
+  const monthlyCost = calculateMonthlyCost( Math.round(containerCount * 100)/100);
+  const offsiteCost = calculateOffsiteCost( Math.round(containerCount * 100)/100);
 
 
   function calculateDistanceCost(distance) {
@@ -44,16 +44,15 @@ const ConfigBox = ({prices, containers, deliveryDistance, pickupDistance, reloca
   
   return (
     <div className="config-box has-shadow" id="estimate-box">     
-      <h3>Config</h3>
       <table>
         <tbody>
           <tr><td> Delivery Distance (Dropoff from yard):  </td><td>{deliveryDistance} </td></tr>
-          {storageType == 2 && <tr><td> Relocation Distance (Location 1 to Location 2):  </td><td>{relocationDistance}</td></tr>}
+          <tr><td> Relocation Distance (Location 1 to Location 2):  </td><td>{relocationDistance}</td></tr>
           <tr><td> Delivery Distance (Pickup and return to yard):  </td><td>{pickupDistance}</td></tr>
-          <tr><td>Fuel Cost: {deliveryDistance * prices.fuelModifier}</td></tr>
-          <tr><td>Maintenance Cost: {deliveryDistance * prices.maintenanceModifier}</td></tr>
-          <tr><td>Fixed Cost: {prices.fixedCost }</td></tr>
-          <tr><td>Min Delivery Cost: {prices.minDeliveryCost}</td></tr>
+          <tr><td>Fuel Cost: ${deliveryDistance * prices.fuelModifier}</td></tr>
+          <tr><td>Maintenance Cost: ${deliveryDistance * prices.maintenanceModifier}</td></tr>
+          <tr><td>Fixed Cost: ${prices.fixedCost }</td></tr>
+          <tr><td>Min Delivery Cost: ${prices.minDeliveryCost}</td></tr>
         </tbody>
       </table>  
     

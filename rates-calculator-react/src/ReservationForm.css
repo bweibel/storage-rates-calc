@@ -25,13 +25,13 @@ label {
     margin-bottom: .5rem;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="date"],
-input[type="tel"],
-textarea,
-select {
-    font-family: 'Helvetica Neue', sans-serif;
+
+.RatesCalculator input[type="text"],
+.RatesCalculator input[type="email"],
+.RatesCalculator input[type="date"],
+.RatesCalculator input[type="tel"],
+.RatesCalculator textarea,
+.RatesCalculator select {
     padding: 1em;
     font-size: 16px;
     border: 2px solid #ccc;
@@ -39,22 +39,22 @@ select {
     width: 100%;
 }
 
-select,
-input[type="date"] {
+.RatesCalculator select,
+.RatesCalculator input[type="date"] {
     background: #fff;
 }
 
-input[type="date"] {
+.RatesCalculator input[type="date"] {
     width: fit-content;
     max-width: 100%;
 }
 
-.reservation-form button {
+.RatesCalculator .reservation-form button {
     grid-column: 1/-1;
     max-width: min-content;
     justify-self: center;
 }
 
-.calendar-input {
+.RatesCalculator .calendar-input {
     width: fit-content;
 }

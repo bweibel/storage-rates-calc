@@ -3,18 +3,23 @@ import './EstimateBox.css';
 import { getTotalContainerCount, generateContainerInfo, calculateTotalPrice, calculateTotalOffsitePrice } from './utils/functions';
 import { CONTAINERS } from './utils/constants';
 
-const EstimateBox = ({ prices, deliveryDistance, pickupDistance, relocationDistance, containerCount, storageType }) => {
+const EstimateBox = ({ prices, deliveryDistance, pickupDistance, relocationDistance, initialStorageDistance, finalStorageDistance, containerCount, storageType }) => {
   const deliveryCost = calculateDistanceCost(deliveryDistance);
+  
   const pickupCost = calculateDistanceCost(pickupDistance);
+  const initialStorageCost = calculateDistanceCost(initialStorageDistance);
+  const finalStorageCost = calculateDistanceCost(finalStorageDistance);
   const relocationCost = calculateDistanceCost(relocationDistance);
   const monthlyCost = calculateMonthlyCost(containerCount);
   const offsiteCost = calculateOffsiteCost(containerCount);
+
+  console.log("Initial Storage")
+  console.log(initialStorageCost);
 
   // 
   // 
   // 
   function calculateDistanceCost(distance) {
-    // console.log("calculating Distance Cost for " + distance);
     if (distance == null) {
       return null;
     }
@@ -35,7 +40,6 @@ const EstimateBox = ({ prices, deliveryDistance, pickupDistance, relocationDista
       return null;
     }
     const generatedContainerInfo = generateContainerInfo(CONTAINERS, containerCount);
-    console.log(generatedContainerInfo);
     const totalPrice = calculateTotalPrice(generatedContainerInfo);
     const monthlyCost = Math.round(totalPrice);
     return monthlyCost;
@@ -67,9 +71,11 @@ const EstimateBox = ({ prices, deliveryDistance, pickupDistance, relocationDista
             <h4>Pickup</h4>
             <span className="cost">$ {pickupCost || '-'}</span>
         </div>
-        {storageType == 2 && <div className="price-box">
+        { (storageType == 2 || storageType == 3 ) && <div className="price-box">
           <h4>Relocation</h4>
-          <span className="cost">$ {relocationCost || '-'}</span>
+          {storageType == 3 && <span className="cost">To Storage $ {initialStorageCost || '-'}</span>}
+          {storageType == 3 && <span className="cost">From Storage $ {finalStorageCost || '-'}</span>}
+          {storageType == 2 && <span className="cost">$ {relocationCost || '-'}</span>}
         </div>}
         <div className="price-box">
           <h4>Monthly</h4>

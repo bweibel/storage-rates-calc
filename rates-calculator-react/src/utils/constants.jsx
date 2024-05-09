@@ -23,9 +23,9 @@ export const STORAGE_TYPES = {
 export const CONTAINERS = [
     {
         "size": "8'x8'x16'",
-        "image": "http://localhost:10033/wp-content/uploads/2018/05/container-sizes-16-ft.png",
+        "image": "/wp-content/uploads/2018/05/container-sizes-16-ft.png",
         "monthly_fee": "165",
-        "offsite_fee": "",
+        "offsite_fee": "75",
         "dropoff_fee": "",
         "pickup_fee": "",
         "description": "3-4 rooms (1,024 sq ft)",
@@ -33,9 +33,9 @@ export const CONTAINERS = [
     },
     {
         "size": "8'x8'x20'",
-        "image": "http://localhost:10033/wp-content/uploads/2018/05/container-sizes-20-ft.png",
+        "image": "/wp-content/uploads/2018/05/container-sizes-20-ft.png",
         "monthly_fee": "185",
-        "offsite_fee": "",
+        "offsite_fee": "75",
         "dropoff_fee": "",
         "pickup_fee": "",
         "description": "4-5 rooms (1,280 sq ft)",
@@ -43,9 +43,9 @@ export const CONTAINERS = [
     },
     {
         "size": "40'",
-        "image": "http://localhost:10033/wp-content/uploads/2019/11/Storage-2U-40-Foot-Container-Blue.png",
+        "image": "/wp-content/uploads/2019/11/Storage-2U-40-Foot-Container-Blue.png",
         "monthly_fee": "149",
-        "offsite_fee": "",
+        "offsite_fee": "75",
         "dropoff_fee": "",
         "pickup_fee": "",
         "description": "",
@@ -118,7 +118,7 @@ export let VARS;
       "containers": [
           {
               "size": "8'x8'x16'",
-              "image": "http://localhost:10033/wp-content/uploads/2018/05/container-sizes-16-ft.png",
+              "image": "/wp-content/uploads/2018/05/container-sizes-16-ft.png",
               "monthly_fee": "165",
               "offsite_fee": "",
               "dropoff_fee": "",
@@ -128,7 +128,7 @@ export let VARS;
           },
           {
               "size": "8'x8'x20'",
-              "image": "http://localhost:10033/wp-content/uploads/2018/05/container-sizes-20-ft.png",
+              "image": "/wp-content/uploads/2018/05/container-sizes-20-ft.png",
               "monthly_fee": "185",
               "offsite_fee": "",
               "dropoff_fee": "",
@@ -138,7 +138,7 @@ export let VARS;
           },
           {
               "size": "40'",
-              "image": "http://localhost:10033/wp-content/uploads/2019/11/Storage-2U-40-Foot-Container-Blue.png",
+              "image": "/wp-content/uploads/2019/11/Storage-2U-40-Foot-Container-Blue.png",
               "monthly_fee": "149",
               "offsite_fee": "",
               "dropoff_fee": "",

@@ -9,7 +9,6 @@ import ConfigBox from "./ConfigBox";
 
 import StepTwo from './StepTwo';
 import StepThree from './StepThree';
-import { Calculator } from 'lucide-react';
 
 const dataUrl = 'http://localhost:10033/wp-json/wp/v2/calculator/740';
 
@@ -32,6 +31,8 @@ const [prices, setPrices] = useState( {
   const [deliveryDistance, setDeliveryDistance] = useState(null);
   const [pickupDistance, setPickupDistance] = useState(null);
   const [storageDistance, setStorageDistance] = useState(null);
+  const [initialStorageDistance, setInitialStorageDistance] = useState(null);
+  const [finalStorageDistance, setFinalStorageDistance] = useState(null);
 
   const [relocationDistance, setRelocationDistance] = useState(null);
 
@@ -74,6 +75,9 @@ const [prices, setPrices] = useState( {
         setParentDeliveryDistance={setDeliveryDistance}
         setParentPickupDistance={setPickupDistance}
         setParentRelocationDistance={setRelocationDistance}
+        setParentInitialStorageDistance={setInitialStorageDistance}
+        setParentFinalStorageDistance={setFinalStorageDistance}
+
         setStorageDistance={setStorageDistance} />}
       <EstimateBox
         prices={prices}
@@ -82,16 +86,19 @@ const [prices, setPrices] = useState( {
         pickupDistance={pickupDistance}
         relocationDistance={relocationDistance}
         containerCount={containerCount}
-        storageType={storageType} />
+        storageType={storageType}
+        initialStorageDistance={initialStorageDistance}
+        finalStorageDistance={finalStorageDistance}
+      />
        
-      <ConfigBox
+      {VARS.configMode && <ConfigBox
         prices={prices}
         containers={containers}
         deliveryDistance={deliveryDistance}
         pickupDistance={pickupDistance}
         relocationDistance={relocationDistance}
         containerCount={containerCount}
-        storageType={storageType} />
+        storageType={storageType} />}
 
       {initialDeliveryAddress && <StepThree
         containers={containers}

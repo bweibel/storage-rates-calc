@@ -17,9 +17,14 @@
 
 .estimate-box .prices {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
-   
     text-align: center;
+}
+
+.estimate-box .prices .price-box {
+    flex-basis: 10em;
+    max-width: 50%;
 }
 
 .estimate-box .title {
@@ -30,10 +35,13 @@
 }
 
 .estimate-box .price-box h4 {
+    font-size: 18px;
     margin-bottom: 10px;
 }
 
 .estimate-box .cost {
+    /* font-size: 14px; */
     font-weight: 600;
     display: block;
+    margin-bottom: 2px;
 }

@@ -51,7 +51,7 @@ const ContainerSelector = ({containers, containerCount, setContainerCount, stora
           <div key={container.id} className='container-card card has-shadow'>
             <h4 className='container-title'>{container.size}</h4>
             <p>{ container.description }</p>
-            <img src={'http://localhost:10033/' + container.image} alt="" width="120px" />
+            <img src={container.image} alt="" width="120px" />
             <div className="quantity">
               <button 
                 className='quantity-button quantity-down'

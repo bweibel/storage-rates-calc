@@ -36,12 +36,12 @@
   }
   
   
-  .quantity input {
+  .RatesCalculator .quantity input {
     text-align: center;
     border: none;
   }
   
-  .quantity input:focus {
+  .RatesCalculator .quantity input:focus {
   }
   
   
